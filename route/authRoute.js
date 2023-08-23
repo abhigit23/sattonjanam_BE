@@ -3,4 +3,10 @@ const authController = require('../controller/authController')
 
 router.post(`/register`, authController.register)
 
+router.get(`/user/all`, authController.getAll)
+
+router.get(`/user/single/:id`, authController.getSingle)
+
+router.delete(`/delete/:id`, authController.delete)
+
 module.exports = router
