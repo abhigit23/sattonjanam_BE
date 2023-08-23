@@ -55,6 +55,40 @@ const authController = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  getAll: async (req,res) => {
+    try {
+        let data = await User.find()
+
+        return res.status(200).json({ length: data.length, users: data })
+    } catch (err) {
+        return  res.status(500).json({ msg: err.message })
+    }
+  },
+  getSingle: async (req,res) => {
+      try {
+        let data = await User.findById({ _id: req.params.id })
+              if(!data)
+                  return res.status(404).json({ msg: "User doesn't exists."})
+
+              res.status(200).json({ user: data })
+      } catch (err) {
+          return  res.status(500).json({ msg: err.message })
+      }
+  },
+  delete: async (req,res) => {
+      try {
+          let data = await User.findById({ _id: req.params.id })
+              if(!data)
+                  return res.status(404).json({ msg: "User doesn't exists."})
+
+              await User.findByIdAndDelete({ _id: req.params.id })
+
+              return res.status(200).json({ msg: "User deleted succcessfully"})
+          
+      } catch (err) {
+          return  res.status(500).json({ msg: err.message })
+      }
+  }
 };
 
 module.exports = authController;
