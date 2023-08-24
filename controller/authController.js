@@ -85,6 +85,34 @@ const authController = {
             return res.status(500).json({ msg: err.message});
         }
   },
+  authToken: async (req, res) => {
+    try {
+    
+      const token = req.signedCookies.accessToken //signed cookie => secured cookie
+      // res.json({ token });
+      if (!token)
+        return res.status(400).json({ msg: "Session Expired... Login Again.." });
+
+      // reverse login to validate the userid
+      jwt.verify(token, process.env.ACCESS_SECRET, (err,data) => {
+        if (err) 
+          return res.status(400).json({ msg: "Invalid Access Token.." });
+        // regenerate access data
+        const accessToken = createAccessToken({ _id : data._id})
+        res.json({ accessToken });
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  currentUser : async (req, res)=>{
+    try {
+        const cUser = await User.findById({ _id : req.user})
+        res.json({ user : cUser})
+    } catch (err) {
+        return res.status(500).json({ msg : err.message})
+    }
+  },
   getAll: async (req,res) => {
     try {
         let data = await User.find()
