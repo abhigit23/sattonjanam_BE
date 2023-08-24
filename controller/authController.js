@@ -1,5 +1,7 @@
 const User = require("../model/userModel");
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken')
+const { createAccessToken } = require('../util/token')
 
 const authController = {
   register: async (req, res) => {
@@ -55,6 +57,33 @@ const authController = {
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
+  },
+  login: async (req,res) => {
+        try {
+            const { email, password } = req.body;
+
+            let extUser = await User.findOne({ email })
+                if(!extUser)
+                    return res.status(400).json({ msg: "User doesn't exists."})
+
+            const isMatch = await bcrypt.compare(password,extUser.password)
+                if(!isMatch)
+                    return res.status(400).json({ msg: "passwords doesn't match"})
+
+            const accessToken = createAccessToken({ _id: extUser._id })
+
+            res.cookie('accessToken', accessToken, {
+                        httpOnly: true,
+                        signed: true,
+                        path: `/api/v1/auth/authToken`,
+                        maxAge: 1 * 24 * 60 *60* 1000
+            });
+        
+
+            res.json({token: accessToken,  msg: "Login Successfully" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message});
+        }
   },
   getAll: async (req,res) => {
     try {
