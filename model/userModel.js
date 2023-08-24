@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    image:{
+        type: Object,
+        required: true
+    },
     religion:{
         type: String,
         trim: true

@@ -7,6 +7,7 @@ const authController = {
       const {
         registeredFor,
         userName,
+        image,
         religion,
         gender,
         email,
