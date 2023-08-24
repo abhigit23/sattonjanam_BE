@@ -66,7 +66,7 @@ const authController = {
                 if(!extUser)
                     return res.status(400).json({ msg: "User doesn't exists."})
 
-            const isMatch = await bcrypt.compare(password,extUser.password)
+            let isMatch = await bcrypt.compare(password,extUser.password)
                 if(!isMatch)
                     return res.status(400).json({ msg: "passwords doesn't match"})
 
