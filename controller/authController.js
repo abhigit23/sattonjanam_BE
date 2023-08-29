@@ -178,7 +178,7 @@ const authController = {
       subject: "Thank you for contacting with sattonjanam.com",
       html: `
           <div style="margin: 20px;">
-            <h3>Dear ${req.body.name},</h3>
+            <h3>Dear ${req.body.userName},</h3>
             <p>Thank you for contacting with sattonjanam.com</p>
             <p>Your are very improtant to us, all information received will always remain confidential.</p>
             <p>We will contact you as soon as we review your message or you can reach us on 9773643677</p>
