@@ -2,6 +2,10 @@ const User = require("../model/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken')
 const { createAccessToken } = require('../util/token')
+const path = require('path')
+const nodemailer = require('nodemailer')
+const fs = require('fs')
+require('dotenv').config()
 
 const authController = {
   register: async (req, res) => {
@@ -85,6 +89,15 @@ const authController = {
             return res.status(500).json({ msg: err.message});
         }
   },
+  logout: async (req, res) => {
+    // res.json({msg : 'logout'})
+      try {
+          res.clearCookie("accessToken", { path : `/api/v1/auth/authToken`})
+          res.status(200).json({ msg : "logout successfully.."})
+      } catch (err) {
+          return res.status(500).json({ msg : err.message })
+      }
+  },
   authToken: async (req, res) => {
     try {
     
@@ -146,6 +159,37 @@ const authController = {
       } catch (err) {
           return  res.status(500).json({ msg: err.message })
       }
+  },
+  sendMail: async (req,res) => {
+    let smtpTransport = nodemailer.createTransport({
+      service: process.env.MAIL_SERVICE,
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      secure: true,
+        auth: {
+                user: process.env.MAIL_ID,
+                pass: process.env.MAIL_PASSWORD
+        },
+        tls:{rejectUnauthorized:false}
+    })
+    smtpTransport.sendMail({
+      from: process.env.MAIL_ID,
+      to: req.body.email,
+      subject: "Thank you for contacting with sattonjanam.com",
+      html: `
+          <div style="margin: 20px;">
+            <h3>Dear ${req.body.name},</h3>
+            <p>Thank you for contacting with sattonjanam.com</p>
+            <p>Your are very improtant to us, all information received will always remain confidential.</p>
+            <p>We will contact you as soon as we review your message or you can reach us on 9773643677</p>
+          </div>
+      `
+    },function(error,info){
+      if(error){
+         console.log(error);
+      }  
+      res.send("Mail has been sended to your email, Check your mail.")
+    })
   }
 };
 

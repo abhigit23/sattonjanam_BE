@@ -162,7 +162,15 @@ const userSchema = new mongoose.Schema({
     aboutFamily:{
         type: Array,
         default: []
-    }
+    },
+    role: {
+        type: String,
+        default: "user",
+      },
+    isActive: {
+        type: Boolean,
+        default: true,
+      },
 },{
     collection: 'users',
     timestamps: true
