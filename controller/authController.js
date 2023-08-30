@@ -196,6 +196,7 @@ const authController = {
   },
   allUsers: async (req,res) => {
     try {
+      
         let data = await User.find().select('-password')
 
         let nonAdmin = data.filter((item) => item.role !== 'superadmin')
