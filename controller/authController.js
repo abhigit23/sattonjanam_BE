@@ -74,6 +74,9 @@ const authController = {
                 if(!isMatch)
                     return res.status(400).json({ msg: "passwords doesn't match"})
 
+            if(!extUser.isActive)
+                    return res.status(400).json({ msg: "Sorry, your account is blocked, contact Admin"})
+
             const accessToken = createAccessToken({ _id: extUser._id })
 
             res.cookie('accessToken', accessToken, {
@@ -84,7 +87,7 @@ const authController = {
             });
         
 
-            res.json({  msg: "Login Successfully" })
+            res.json({token: accessToken,  msg: "Login Successfully" })
         } catch (err) {
             return res.status(500).json({ msg: err.message});
         }
@@ -190,7 +193,20 @@ const authController = {
       }  
       res.send("Mail has been sended to your email, Check your mail.")
     })
-  }
+  },
+  allUsers: async (req,res) => {
+    try {
+      
+        let data = await User.find().select('-password')
+
+        let nonAdmin = data.filter((item) => item.role !== 'superadmin')
+        
+        res.status(200).json({ length: nonAdmin.length, users: nonAdmin })
+
+    } catch (err) {
+        return res.status(500).json({ msg: err.message })
+    }
+}
 };
 
 module.exports = authController;
