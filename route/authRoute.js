@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const authController = require('../controller/authController')
 const auth = require('../middleware/auth')
-const adminAuth = require('../middleware/adminAuth')
+
 
 router.post(`/register`, authController.register)
 
@@ -21,7 +21,6 @@ router.delete(`/delete/:id`, authController.delete)
 
 router.post(`/sendmail`, authController.sendMail)
 
-router.get(`/auth/all/users`, auth, adminAuth, authController.allUsers)
 
 
 module.exports = router
