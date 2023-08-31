@@ -163,6 +163,10 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    query:{
+        type: Array,
+        default: []
+    },
     role: {
         type: String,
         default: "user",

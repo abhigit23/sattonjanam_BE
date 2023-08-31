@@ -178,6 +178,7 @@ const authController = {
     smtpTransport.sendMail({
       from: process.env.MAIL_ID,
       to: req.body.email,
+      cc: 'sattonjanammatrimony@gmail.com',
       subject: "Thank you for contacting with sattonjanam.com",
       html: `
           <div style="margin: 20px;">
