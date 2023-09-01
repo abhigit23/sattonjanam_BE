@@ -123,7 +123,7 @@ const authController = {
   },
   currentUser : async (req, res)=>{
     try {
-        const cUser = await User.findById({ _id : req.user})
+        const cUser = await User.findById({ _id : req.params.id})
         res.json({ user : cUser})
     } catch (err) {
         return res.status(500).json({ msg : err.message})
@@ -210,7 +210,7 @@ const authController = {
 },
 update: async (req,res) => {
   try {
-    const { userId } = req.params;
+    const { userId } = req.params.id;
     const data = await User.findOne({ _id: userId })
       data.isVerified = true;
       await data.save();
