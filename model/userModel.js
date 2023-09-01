@@ -175,6 +175,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
       },
+      isVerified: {
+        type: Boolean,
+        default: false,
+      }
 },{
     collection: 'users',
     timestamps: true

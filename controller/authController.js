@@ -207,6 +207,19 @@ const authController = {
     } catch (err) {
         return res.status(500).json({ msg: err.message })
     }
+},
+update: async (req,res) => {
+  try {
+    const { userId } = req.params;
+    const data = await User.findOne({ _id: userId })
+      data.isVerified = true;
+      await data.save();
+  
+      return res.status(200).json({ msg: "user updated succesfully"})
+    
+  } catch (err) {
+    return res.status(500).json({ msg: err.message })
+  }
 }
 };
 
