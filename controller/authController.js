@@ -210,13 +210,12 @@ const authController = {
 },
 update: async (req,res) => {
   try {
-    const data = await User.findById({ _id: req.params.id })
-          if(!data)
-                return res.status(404).json({ msg: "User doesn't exists."})
-    
-      let updated = await User.findByIdAndUpdate({ _id: req.params.id }, req.body)
+    const { _id } = req.body
+    const data = await User.findOne({ _id: req.params.id })
+      data.isVerified = true;
+      await data.save();
   
-      return res.status(200).json({ msg: "user updated succesfully", users: updated})
+      return res.status(200).json({ msg: "user updated succesfully"})
     
   } catch (err) {
     return res.status(500).json({ msg: err.message })
