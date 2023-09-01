@@ -23,4 +23,6 @@ router.post(`/sendmail`, authController.sendMail)
 
 router.get(`/all/users`, auth, adminAuth, authController.allUsers)
 
+router.patch(`/update/:id`, auth, adminAuth, authController.update)
+
 module.exports = router
