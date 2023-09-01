@@ -144,6 +144,8 @@ const authController = {
               if(!data)
                   return res.status(404).json({ msg: "User doesn't exists."})
 
+              data.isVerified = true;
+              await user.save();
               res.status(200).json({ user: data })
       } catch (err) {
           return  res.status(500).json({ msg: err.message })
