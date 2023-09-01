@@ -144,8 +144,6 @@ const authController = {
               if(!data)
                   return res.status(404).json({ msg: "User doesn't exists."})
 
-              data.isVerified = true;
-              await user.save();
               res.status(200).json({ user: data })
       } catch (err) {
           return  res.status(500).json({ msg: err.message })
@@ -212,7 +210,7 @@ const authController = {
 },
 update: async (req,res) => {
   try {
-    const { _id } = req.body
+    const { userId } = req.body;
     const data = await User.findOne({ _id: req.params.id })
       data.isVerified = true;
       await data.save();
