@@ -210,8 +210,8 @@ const authController = {
 },
 update: async (req,res) => {
   try {
-    const { userId } = req.body;
-    const data = await User.findOne({ _id: req.params.id })
+    const { userId } = req.params;
+    const data = await User.findOne({ _id: userId })
       data.isVerified = true;
       await data.save();
   
