@@ -194,8 +194,8 @@ const userSchema = new mongoose.Schema(
 userSchema.pre("save", async function (next) {
   try {
     const maxCounter = await User.findOne({}).sort({ sjId: -1 }).select("sjId");
-    if (!maxCounter.sjId) this.sjId = 5000;
-    this.sjId = maxCounter.sjId + 1;
+    if (!maxCounter || !maxCounter.sjId) this.sjId = 5000;
+    else this.sjId = maxCounter.sjId + 1;
 
     let encPass = await bcrypt.hash(this.password, 10);
     this.password = encPass;
