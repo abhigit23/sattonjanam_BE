@@ -184,6 +184,31 @@ const userSchema = new mongoose.Schema(
     sjId: {
       type: Number,
     },
+    partnerAge: {
+      type: String,
+    },
+
+    partnerHeight: {
+      type: String,
+    },
+    partnerCommunity: {
+      type: String,
+    },
+    partnerCast: {
+      type: String,
+    },
+    partnerEductation: {
+      type: String,
+    },
+    partnerIncome: {
+      type: String,
+    },
+    partnerLocation: {
+      type: String,
+    },
+    partnerMaritalStatus: {
+      type: String,
+    },
   },
   {
     collection: "users",
