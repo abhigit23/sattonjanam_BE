@@ -129,7 +129,11 @@ const authController = {
   },
   getAll: async (req, res) => {
     try {
-      let data = await User.find();
+      let data = await User.find({}).select({
+        sjId: 1,
+        image: 1,
+        isVerified: 1,
+      });
 
       return res.status(200).json({ length: data.length, users: data });
     } catch (err) {
