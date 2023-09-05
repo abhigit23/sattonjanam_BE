@@ -221,6 +221,18 @@ const authController = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  updateUser: async(req,res) => {
+    try {
+      let data = await User.findById({ _id: req.params.id })
+            if(!data)
+                return res.status(404).json({ msg: "User doesn't exists."})
+
+      let updated = await User.findByIdAndUpdate({ _id: req.params.id }, req.body)
+      res.status(200).json({ msg: "User updated successfully", user: updated })
+    } catch (err) {
+      return  res.status(500).json({ msg: err.message })
+    }
+  }
 };
 
 module.exports = authController;
