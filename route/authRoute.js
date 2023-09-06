@@ -25,7 +25,7 @@ router.get(`/all/users`, auth, adminAuth, authController.allUsers);
 
 router.patch(`/update/:userId`, auth, adminAuth, authController.update);
 
-router.patch(`/user/update/:userId`,  authController.update);
+router.patch(`/user/update/:id`,  authController.updateUser);
 
 
 module.exports = router;

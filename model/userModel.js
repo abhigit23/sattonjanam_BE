@@ -12,8 +12,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     image: {
-      type: Object,
-      required: true,
+      type: Object
     },
     religion: {
       type: String,
