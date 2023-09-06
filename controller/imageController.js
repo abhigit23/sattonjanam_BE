@@ -52,12 +52,12 @@ const imageController = {
     },
     destroy: async (req,res) => {
         try {
-            const { image } = req.body 
+            const {  public_id } = req.body 
 
-            if(!image)
+            if(!public_id)
                 return res.status(400).json({msg:'No public_id found'})
 
-                await cloudinary.v2.uploader.destroy(image, (err,result) => {
+                await cloudinary.v2.uploader.destroy(public_id, (err,result) => {
                     if(err)
                         return res.status(400).json({ msg: err.message })
                     res.status(200).json({ msg: "Image deleted successfully."})
