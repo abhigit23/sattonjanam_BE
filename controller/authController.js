@@ -178,7 +178,6 @@ const authController = {
       {
         from: process.env.MAIL_ID,
         to: req.body.email,
-        cc: "info@sattonjanam.com",
         subject: "Thank you for contacting with sattonjanam.com",
         html: `
           <div style="margin: 20px;">
@@ -186,6 +185,41 @@ const authController = {
             <p>Thank you for contacting with sattonjanam.com</p>
             <p>You are very improtant to us, all information received will always remain confidential.</p>
             <p>We will contact you as soon as we review your message or you can reach us on 9773643677</p>
+          </div>
+      `,
+      },
+      function (error, info) {
+        if (error) {
+          console.log(error);
+        }
+        res.send("Mail has been sended to your email, Check your mail.");
+      }
+    );
+    return sendingMail;
+  },
+  sendMailAdmin: async (req, res) => {
+    let smtpTransport = nodemailer.createTransport({
+      service: process.env.MAIL_SERVICE,
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      secure: true,
+      auth: {
+        user: process.env.MAIL_ID,
+        pass: process.env.MAIL_PASSWORD,
+      },
+      tls: { rejectUnauthorized: false },
+    });
+    const sendingMail = smtpTransport.sendMail(
+      {
+        from: process.env.MAIL_ID,
+        to: 'info@sattonjanam.com',
+        subject: "New User registered",
+        html: `
+          <div style="margin: 20px;">
+            <h3>Hi ${process.env.MAIL_ID},</h3>
+            <p>Got a new registration,</p>
+            <p>Name: ${req.body.userName}</p>
+            <p>Please open admin panel to check the details.</p>
           </div>
       `,
       },

@@ -21,6 +21,8 @@ router.delete(`/delete/:id`, auth, adminAuth, authController.delete);
 
 router.post(`/sendmail`, authController.sendMail);
 
+router.post(`/sendmailadmin`, authController.sendMailAdmin);
+
 router.get(`/all/users`, auth, adminAuth, authController.allUsers);
 
 router.patch(`/update/:userId`, auth, adminAuth, authController.update);
