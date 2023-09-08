@@ -73,7 +73,8 @@ const queryController = {
         })
         smtpTransport.sendMail({
           from: process.env.MAIL_ID,
-          to: 'support@sattonjanam.com',
+          to: req.body.email ,
+          cc: 'info@sattonjanam.com',
           subject: "Enquery Message",
           html: `
               <div style="margin: 20px;">
