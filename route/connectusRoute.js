@@ -5,4 +5,6 @@ router.post(`/create`, connectusController.createConnectus)
 
 router.post(`/sendmail`, connectusController.sendConnectusMail)
 
+router.post(`/sendmailuser`, connectusController.sendConnectusMailuser)
+
 module.exports = router

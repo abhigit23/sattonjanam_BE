@@ -26,8 +26,7 @@ const connectusController = {
           })
           smtpTransport.sendMail({
             from: process.env.MAIL_ID,
-            to: req.body.email,
-            cc: 'info@sattonjanam.com',
+            to: 'info@sattonjanam.com',
             subject: "Query Message",
             html: `
                 <div style="margin: 20px;">
@@ -46,7 +45,36 @@ const connectusController = {
             }  
             res.send("Mail has been sended to your email, Check your mail.")
           })
-    }
+    },
+    sendConnectusMailuser: async (req,res) => {
+      let smtpTransport = nodemailer.createTransport({
+          service: process.env.MAIL_SERVICE,
+          host: process.env.MAIL_HOST,
+          port: process.env.MAIL_PORT,
+          secure: true,
+            auth: {
+                    user: process.env.MAIL_ID,
+                    pass: process.env.MAIL_PASSWORD
+            },
+            tls:{rejectUnauthorized:false}
+        })
+        smtpTransport.sendMail({
+          from: process.env.MAIL_ID,
+          to: req.body.email,
+          subject: "Thank you for connecting with  sattonjanam.com",
+          html: `
+              <div style="margin: 20px;">
+                <h3>Thank you for connecting with  sattonjanam.com,</h3>
+                <p> We will reach back to you shortly.</p>  
+              </div>
+          `
+        },function(error,info){
+          if(error){
+             console.log(error);
+          }  
+          res.send("Mail has been sended to your email, Check your mail.")
+        })
+  }
 }
 
 module.exports = connectusController;
