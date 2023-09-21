@@ -52,7 +52,7 @@ const imageController = {
     },
     destroy: async (req,res) => {
         try {
-            const { public_id } = req.body 
+            const {  public_id } = req.body 
 
             if(!public_id)
                 return res.status(400).json({msg:'No public_id found'})

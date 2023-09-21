@@ -23,6 +23,8 @@ app.use(cors({ origin: "https://www.sattonjanam.com", credentials: true }));
 
 app.use(`/api/v1/`, require("./route/authRoute"));
 app.use(`/api/v1/image/`, require("./route/imageRouter"));
+app.use(`/api/v1/query`, require("./route/queryRouter"));
+app.use(`/api/v1/connectus`, require("./route/connectusRoute"));
 
 app.all("*", (req, res, next) => {
   res.status(404).json({ msg: `requested path not found, try '/api/v1/'` });
