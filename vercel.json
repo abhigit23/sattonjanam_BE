@@ -8,12 +8,9 @@
   ],
   "routes": [
     {
-      "src": "/api/v1/(.*)",
-      "dest": "/api/v1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/server.js"
+      "dest": "server.js"
     }
-  ]
+  ],
+  "regions": ["bom1"]
 }
