@@ -31,8 +31,22 @@ app.all("*", (req, res, next) => {
   next();
 });
 
-app.listen(PORT, async () => {
-  await connectDb(process.env.MONGO_URL);
-  console.log("Connected to MongoDB...");
-  console.log(`server is started @ http://localhost:${PORT}`);
-});
+// app.listen(PORT, async () => {
+//   await connectDb(process.env.MONGO_URL);
+//   console.log("Connected to MongoDB...");
+//   console.log(`server is started @ http://localhost:${PORT}`);
+// });
+
+const start = async () => {
+  try {
+    app.listen(PORT, () => {
+      console.log(`Server is listening to port ${PORT}...`);
+    });
+    await connectDb(process.env.MONGO_URL);
+    console.log("Connected to MongoDB...");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
