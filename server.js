@@ -22,7 +22,7 @@ app.use(
 );
 
 app.use(`/api/v1/`, require("./route/authRoute"));
-app.use(`/api/v1/image/`, require("./route/imageRouter"));
+app.use(`/api/v1/image`, require("./route/imageRouter"));
 app.use(`/api/v1/query`, require("./route/queryRouter"));
 app.use(`/api/v1/connectus`, require("./route/connectusRoute"));
 app.use(`/api/v1/contactus`, require("./route/contactusRouter"));
