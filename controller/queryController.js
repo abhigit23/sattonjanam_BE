@@ -1,4 +1,4 @@
-const User = require("../model/userModel");
+const User = require("../model/connectUsModel");
 const bcrypt = require("bcryptjs");
 const nodemailer = require('nodemailer')
 require('dotenv').config()
@@ -6,52 +6,7 @@ require('dotenv').config()
 const queryController = {
     createQuery: async (req,res) => {
         try {
-            const {
-              registeredFor,
-              userName,
-              image,
-              religion,
-              gender,
-              email,
-              phoneNumber,
-              password,
-              age,
-              caste,
-              subCaste,
-              gotra,
-              hobbies,
-              height,
-              color,
-              createProfileFor,
-              motherTongue,
-              maritalStatus,
-              manglik,
-              smoking,
-              drinking,
-              country,
-              state,
-              city,
-              pinCode,
-              highestDegree,
-              employedIn,
-              occupation,
-              business,
-              job,
-              annualIncome,
-              myself,
-              familyType,
-              fatherOccupation,
-              motherOccupation,
-              brother,
-              sister,
-              familyLivingIn,
-              contactAddress,
-              aboutFamily,
-              query
-            } = req.body;
-      
-            let encPass = await bcrypt.hash(password, 10);
-      
+            
             let newUser = await User.create(req.body);
       
             res.json({ msg: "User query registered successfully", user: newUser });
