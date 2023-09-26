@@ -40,8 +40,9 @@ const imageController = {
 
             cloudinary.v2.uploader.upload(file.tempFilePath, { folder: 'images' }, async (err,result) => {
                 if(err)
+                res.header("Access-Control-Allow-Origin", "http://localhost:5173","https://www.sattonjanam.com")
                 res.status(400).json({msg: err.message})
-
+                
                 removeTemp(file.tempFilePath)
                 // read only public_id and url form respose
                 res.status(200).json({ result })
