@@ -18,8 +18,12 @@ app.use(
   })
 );
 
+const origin = [
+  "https://www.sattonjanam.com",
+  `http://localhost:${process.env.PORT}`,
+];
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(cors({ origin: "https://www.sattonjanam.com", credentials: true }));
+app.use(cors({ origin, credentials: true  }));
 
 app.use(`/api/v1/`, require("./route/authRoute"));
 app.use(`/api/v1/image/`, require("./route/imageRouter"));
