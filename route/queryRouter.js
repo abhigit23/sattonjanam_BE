@@ -5,4 +5,6 @@ router.post(`/queryCreate`, queryController.createQuery)
 
 router.post(`/sendQuery`, queryController.sendQueryMail)
 
+router.post(`/sendQueryuser`, queryController.sendQueryMailuser)
+
 module.exports = router
