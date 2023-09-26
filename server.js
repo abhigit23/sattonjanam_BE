@@ -20,7 +20,7 @@ app.use(
 
 const origin = [
   "https://www.sattonjanam.com",
-  `http://localhost:${process.env.PORT}`,
+  "http://localhost:5173",
 ];
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(cors({ origin, credentials: true  }));
