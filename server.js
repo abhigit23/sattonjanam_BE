@@ -15,14 +15,10 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(
-  fileUpload({
-    useTempFiles: true,
-  })
-);
+app.use(fileUpload());
 
 app.use(`/api/v1/`, require("./route/authRoute"));
-app.use(`/api/v1/image`, require("./route/imageRouter"));
+app.use(`/api/v1/image/`, require("./route/imageRouter"));
 app.use(`/api/v1/query`, require("./route/queryRouter"));
 app.use(`/api/v1/connectus`, require("./route/connectusRoute"));
 app.use(`/api/v1/contactus`, require("./route/contactusRouter"));
