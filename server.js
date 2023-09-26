@@ -9,11 +9,8 @@ const connectDb = require("./db");
 const PORT = process.env.PORT;
 
 const app = express();
-const origin = [
-  "https://www.sattonjanam.com",
-  "http://localhost:5173",
-];
-app.use(cors({ origin, credentials: true  }));
+const origin = ["https://www.sattonjanam.com", "http://localhost:5173"];
+app.use(cors({ origin, credentials: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use(express.urlencoded({ extended: true }));
@@ -24,9 +21,8 @@ app.use(
   })
 );
 
-
-app.use(`/api/v1/`, require("./route/authRoute"));
-app.use(`/api/v1/image/`, require("./route/imageRouter"));
+app.use(`/api/v1`, require("./route/authRoute"));
+app.use(`/api/v1/image`, require("./route/imageRouter"));
 app.use(`/api/v1/query`, require("./route/queryRouter"));
 app.use(`/api/v1/connectus`, require("./route/connectusRoute"));
 
